@@ -34,7 +34,7 @@ const loanSchema = new mongoose.Schema(
         minlength: [10, 'A instructor  must have more or equal then 10 characters']
     },
     interest: {
-        type: number,
+        type: Number,
         default: 0,
         min: [0, 'credits must be at or above 0'],
         max: [12, 'credits must be at or below 12']
@@ -62,7 +62,6 @@ const loanSchema = new mongoose.Schema(
         minlength: [10, 'Loan type description must be 10 characters or more']
     },
 });
-const loan = mongoose.model('loan', customerSchema);
+const Loan = mongoose.model('Loan', loanSchema);
 
-module.exports = loan;
-//** code  END
+module.exports = Loan;

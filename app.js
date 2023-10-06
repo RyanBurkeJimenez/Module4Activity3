@@ -1,24 +1,28 @@
-const dotenv = require('dotenv');
-dotenv.config({ path: './config.env' });
+const express = require('express');
+const morgan = require('morgan');
+const app = express();
+const loanRouter = require('./model/loanRoutes');
 
-const app = require('./app');
-const mongoose = require('mongoose');
+// 1) MIDDLEWARES
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
 
-const MONGO_DATA_BASE = process.env.DATABASE.replace('Bestlucianna1', process.env.DB_PASSWORD);
+app.use(express.json());
+app.use(express.static(`${__dirname}/public`));
 
-//Connext to database
-mongoose.connect(MONGO_DATA_BASE,
-  //connection recipie
-  {
-    useNewUrlParser: true,
-    useCreateIndex: true
-  }).then(con=>{
-    console.log(con.connection);// log connection properties
-    console.log(`The Database connection was successful with ${process.env.DATABASE}`);// log connection properties
-  });
-
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`App running on port ${port}...`);
+app.use((req, res, next) => {
+  console.log('Hello from the middleware 👋');
+  next();
 });
-//** Code END
+
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  next();
+});
+
+// 3) ROUTES
+app.use('/api/v1/loans', loanRouter);
+
+
+module.exports = app;
