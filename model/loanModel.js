@@ -22,9 +22,7 @@ const loanSchema = new mongoose.Schema(
         type: String,
         required: [true, 'An address must be entered'],
         unique: true,
-        trim: true,
-        maxlength: [40, 'An address must have less or equal then 40 characters'],
-        minlength: [10, 'An address must have more or equal then 10 characters']
+        trim: true
     },
     description: {
         type: String,

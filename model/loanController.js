@@ -29,9 +29,11 @@ exports.getAllLoans = async (req, res) => {
 
 exports.getLoan = async (req, res) => {
   try {
-    const loan = await Loan.findOne(req.params.id);
+    const { id } = req.params;
+    const loan = await Loan.findOne({ _id: id});
+   
     // Course.findOne({ _id: req.params.id })
-
+   
     res.status(200).json({
       status: 'success',
       data: {
@@ -47,16 +49,17 @@ exports.getLoan = async (req, res) => {
 };
 
 exports.createLoan = async  (req, res) => {
-  try {
-    // const newCourse = new Course({})
-    // newCourse.save()
-
-    const newLoan = await Loan.create(req.body);
+    const newLoan = req.body;
+    const dateTime = new Date().toISOString();
+     //newLoan.save()
     
+     const newLoaner = {...newLoan, createdDate: dateTime, insertedDate: dateTime};
+  try {  
+    const Loaner = await Loan.create(newLoaner)
     res.status(201).json({
       status: 'success',
       data: {
-        Loan: newLoan
+        data: Loaner
       }
     });
   } catch (err) {
