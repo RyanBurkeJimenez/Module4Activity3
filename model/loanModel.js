@@ -7,9 +7,7 @@ const loanSchema = new mongoose.Schema(
         required: [true, 'A customer name must have a name'],
         unique: true,
         trim: true,
-        maxlength: [40, 'A customer name must have less or equal then 40 characters'],
-        minlength: [10, 'A customer name must have more or equal then 10 characters']
-     
+        maxlength: [40, 'A customer name must have less or equal then 40 characters']
     },
     phoneNumber:{
         type: Number,

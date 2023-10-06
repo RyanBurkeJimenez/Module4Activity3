@@ -32,7 +32,7 @@ exports.getLoan = async (req, res) => {
     const { id } = req.params;
     const loan = await Loan.findOne({ _id: id});
    
-    // Course.findOne({ _id: req.params.id })
+  
    
     res.status(200).json({
       status: 'success',

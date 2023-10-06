@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const loanRouter = require('./model/loanRoutes');
 const morgan = require('morgan');
 
-const MONGO_DATA_BASE = process.env.DATABASE.replace('<password>', process.env.DB_PASSWORD);
+const MONGO_DATA_BASE = process.env.DATABASE.replace('<password>', process.env.DB_PASSWORD); //Variables pulled from config.env
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
